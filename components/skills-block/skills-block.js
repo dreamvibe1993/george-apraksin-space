@@ -36,7 +36,7 @@ export function SkillBlock() {
       <Flex wrap="wrap" justify={"space-around"} mb={5}>
         {skills.map((skill) => (
           <Link
-            href={"/" + skill.name.toLowerCase()}
+            href={"/" + skill.id.toLowerCase()}
             key={skill.name}
             bgColor={
               skill.level >= 5

@@ -1,14 +1,5 @@
 import React from "react";
-import axios from "axios";
-import {
-  Image,
-  VStack,
-  Box,
-  Flex,
-  Text,
-  Heading,
-  List,
-} from "@chakra-ui/react";
+import { Image, VStack, Box, Flex, Heading, List } from "@chakra-ui/react";
 
 import Head from "next/head";
 
@@ -26,7 +17,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home(props) {
-  const { skills, personal } = props;
+  const { personal } = props;
 
   const myContacts = [
     // eslint-disable-next-line no-undef
@@ -63,7 +54,7 @@ export default function Home(props) {
               mb={5}
             />
           </Box>
-          <SkillBlock skills={skills} />
+          <SkillBlock />
         </Flex>
         <Heading mt={10}>Contact me.</Heading>
         <List w="100%" maxW="600px">
