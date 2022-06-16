@@ -22,22 +22,7 @@ export async function getServerSideProps() {
     // eslint-disable-next-line no-undef
     myPhone: process.env.MY_PHONE,
   };
-  try {
-    // eslint-disable-next-line no-undef
-    const skills = await axios.get(`${process.env.API_URL}/skills`);
-    return {
-      props: {
-        skills: skills.data.data.map((skill) => ({
-          name: skill.attributes.name,
-          level: skill.attributes.level,
-        })),
-        personal,
-      },
-    };
-  } catch (e) {
-    console.log('ERROR 🆘: ', e.message);
-    return { props: { personal } };
-  }
+  return { props: { personal } };
 }
 
 export default function Home(props) {
@@ -78,16 +63,7 @@ export default function Home(props) {
               mb={5}
             />
           </Box>
-          <SkillBlock skills={skills || []} />
-          <Box
-            w="100%"
-            h="20px"
-            bgGradient="linear(to-r, blue.500, white, red.500)"
-          />
-          <Flex justify={"space-between"} w="100%">
-            <Text>Good</Text>
-            <Text>Bad</Text>
-          </Flex>
+          <SkillBlock skills={skills} />
         </Flex>
         <Heading mt={10}>Contact me.</Heading>
         <List w="100%" maxW="600px">
