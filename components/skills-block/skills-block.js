@@ -6,11 +6,11 @@ import {
   AlertTitle,
   Box,
   Flex,
-  Link,
   Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useLoadSkills } from "../../services/hooks/useLoadSkills/useLoadSkills";
+import Link from "next/link";
 
 export function SkillBlock() {
   const { isLoading, isError, data: skills } = useLoadSkills();
@@ -35,8 +35,7 @@ export function SkillBlock() {
     <>
       <Flex wrap="wrap" justify={"space-around"} mb={5}>
         {skills.map((skill) => (
-          <Link
-            href={"/" + skill.id.toLowerCase()}
+          <Box
             key={skill.name}
             bgColor={
               skill.level >= 5
@@ -47,8 +46,8 @@ export function SkillBlock() {
             p={3}
             m={1}
           >
-            {skill.name}
-          </Link>
+            <Link href={"/" + skill.id.toLowerCase()}>{skill.name}</Link>
+          </Box>
         ))}
       </Flex>
       <Box

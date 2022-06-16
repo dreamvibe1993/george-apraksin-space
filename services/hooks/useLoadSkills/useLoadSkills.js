@@ -1,11 +1,9 @@
 import React from "react";
 import useSWR from "swr";
-import { AppDataContext } from "../../../utils/contexts/contexts";
+import { apiAddress } from "../../../configs/api/config";
 import { fetcher } from "../../api/fetcher/fetcher";
 
 export const useLoadSkills = () => {
-  const { apiAddress } = React.useContext(AppDataContext);
-
   let { data, error } = useSWR(`${apiAddress}/skills`, fetcher);
 
   if (data)
