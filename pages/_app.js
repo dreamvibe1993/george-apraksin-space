@@ -7,11 +7,6 @@ import { theme as chakraTheme } from "../configs/chakra/theme/chakra-theme";
 
 /*
 TODO:
-* Sorting skills
-* Diploma for french or english?
-* Flipping photo
-* Sort and search 4 skills
-* Status indicator of business
 * Head for every page
 */
 

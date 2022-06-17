@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import { SkillBlock } from "../components/skills-block/skills-block";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
+import { StatusBar } from "../components/status-bar/status-bar";
 
 export async function getServerSideProps() {
   const personal = {
@@ -45,6 +46,7 @@ export default function Home(props) {
       </Head>
       <VStack as="main" pb={10} px={10} fontSize={["inherit", 20]}>
         <Heading mt={10}>George.</Heading>
+        <StatusBar />
         <Flex direction="column" align={"center"} maxW="600px">
           <Box maxW={"500px"}>
             <Image

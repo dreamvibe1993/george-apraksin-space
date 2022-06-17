@@ -1,38 +1,54 @@
 import React from "react";
 import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
   Box,
   Flex,
+  Select,
   Spinner,
   Text,
 } from "@chakra-ui/react";
 import { useLoadSkills } from "../../services/hooks/useLoadSkills/useLoadSkills";
 import Link from "next/link";
+import { ErrorProcessingRequest } from "../errors/error-processing-request/error-processing-request";
 
 export function SkillBlock() {
-  const { isLoading, isError, data: skills } = useLoadSkills();
+  const { isLoading, isError, data } = useLoadSkills();
+  const [skills, setSkills] = React.useState([]);
 
-  if (isError)
-    return (
-      <Alert status="error" display="flex" alignItems={"center"}>
-        <AlertIcon />
-        <AlertDescription lineHeight={"unset"}>
-          There was an error processing your request.
-        </AlertDescription>
-      </Alert>
-    );
-  if (isLoading)
+  React.useEffect(() => {
+    if (data && skills.length < 1) setSkills(data);
+  }, [data]);
+
+  const sortByLeastSkilled = () => {
+    setSkills((prev) => [...prev].sort((a, b) => a.level - b.level));
+  };
+
+  const sortByMostSkilled = () => {
+    setSkills((prev) => [...prev].sort((b, a) => a.level - b.level));
+  };
+
+  const sortSkills = (e) => {
+    if (e.target.value === "byMost") sortByMostSkilled();
+    if (e.target.value === "byLeast") sortByLeastSkilled();
+  };
+
+  if (isError) {
+    return <ErrorProcessingRequest />;
+  }
+
+  if (isLoading) {
     return (
       <Flex justify={"center"} mb={5}>
         <Spinner />
       </Flex>
     );
+  }
 
   return (
     <>
+      <Select placeholder="Sort skills by" mb={5} onChange={sortSkills}>
+        <option value="byMost">Most skilled</option>
+        <option value="byLeast">Least skilled</option>
+      </Select>
       <Flex wrap="wrap" justify={"space-around"} mb={5}>
         {skills.map((skill) => (
           <Box

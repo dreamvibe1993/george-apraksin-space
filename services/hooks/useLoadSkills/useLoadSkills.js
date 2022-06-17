@@ -1,4 +1,3 @@
-import React from "react";
 import useSWR from "swr";
 import { apiAddress } from "../../../configs/api/config";
 import { fetcher } from "../../api/fetcher/fetcher";
