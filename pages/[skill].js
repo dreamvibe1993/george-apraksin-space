@@ -7,17 +7,16 @@ import { apiAddress } from "../configs/api/config";
 import { capitalize } from "../utils/text/capitalize";
 
 export async function getServerSideProps(context) {
-  console.log(`Received context: ${context?.params?.skill}`);
   const heading = context?.params?.skill
     ? capitalize(context.params.skill).replace("_", " ")
     : "";
   try {
-    console.log(`Making request by: ${apiAddress}/projects`);
-    const res = await axios.get(`${apiAddress.replace(" ", "")}/projects`);
+    const res = await axios.get(
+      apiAddress.replace(/[\s\r\n]*/, "") + "/projects"
+    );
     const projects = res.data.data.map((proj) => ({
       ...proj.attributes.data,
     }));
-    console.log(`Got response: ${projects}`);
     const projectsNeededForThisPage = projects.filter((proj) =>
       proj.keywords.includes(context.params.skill)
     );
@@ -45,7 +44,7 @@ export function SkillPage(props) {
     return (
       <>
         <HeadComponent title="There is nothing..." />
-        <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]} maxW="600px">
+        <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
           <Flex
             direction="column"
             shadow="base"
@@ -54,6 +53,7 @@ export function SkillPage(props) {
             w="100%"
             border={"1px"}
             borderColor="gray.200"
+            maxW="600px"
           >
             <Heading textAlign={"center"}>There is nothing 😢...</Heading>
             <Text>
@@ -61,7 +61,9 @@ export function SkillPage(props) {
               it is impossible to render them like this.
             </Text>
           </Flex>
-          <LinkBack url="/" />
+          <Flex justify={"flex-start"} w="100%" maxW="600px">
+            <LinkBack url="/" />
+          </Flex>
         </VStack>
       </>
     );
@@ -70,7 +72,7 @@ export function SkillPage(props) {
   return (
     <>
       <HeadComponent title={`George's ${heading} projects`} />
-      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]} maxW="600px">
+      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
         <Heading textAlign={"center"}>My {heading} projects</Heading>
         {projects.map((proj) => {
           return (
@@ -83,6 +85,7 @@ export function SkillPage(props) {
               w="100%"
               border={"1px"}
               borderColor="gray.200"
+              maxW="600px"
             >
               <Flex borderBottom={"1px"} borderColor="gray.200">
                 <Box w={["40%", "20%"]} noOfLines={1} fontWeight={"bold"}>
@@ -128,7 +131,7 @@ export function SkillPage(props) {
             </Flex>
           );
         })}
-        <Flex justify={"flex-start"} w="100%">
+        <Flex justify={"flex-start"} w="100%" maxW="600px">
           <LinkBack url="/" />
         </Flex>
       </VStack>
