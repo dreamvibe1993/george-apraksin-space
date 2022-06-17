@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
@@ -14,17 +7,17 @@ import { apiAddress } from "../configs/api/config";
 import { capitalize } from "../utils/text/capitalize";
 
 export async function getServerSideProps(context) {
-  console.log(`Received context: ${context?.params?.skill}`)
+  console.log(`Received context: ${context?.params?.skill}`);
   const heading = context?.params?.skill
     ? capitalize(context.params.skill).replace("_", " ")
     : "";
   try {
-    console.log(`Making request by: ${apiAddress}/projects`)
-    const res = await axios.get(`${apiAddress}/projects`);
+    console.log(`Making request by: ${apiAddress}/projects`);
+    const res = await axios.get(`${apiAddress.replace(" ", "")}/projects`);
     const projects = res.data.data.map((proj) => ({
       ...proj.attributes.data,
     }));
-    console.log(`Got response: ${projects}`)
+    console.log(`Got response: ${projects}`);
     const projectsNeededForThisPage = projects.filter((proj) =>
       proj.keywords.includes(context.params.skill)
     );
@@ -52,7 +45,7 @@ export function SkillPage(props) {
     return (
       <>
         <HeadComponent title="There is nothing..." />
-        <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
+        <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]} maxW="600px">
           <Flex
             direction="column"
             shadow="base"
@@ -77,7 +70,7 @@ export function SkillPage(props) {
   return (
     <>
       <HeadComponent title={`George's ${heading} projects`} />
-      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
+      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]} maxW="600px">
         <Heading textAlign={"center"}>My {heading} projects</Heading>
         {projects.map((proj) => {
           return (
