@@ -5,11 +5,6 @@ import "../styles/globals.css";
 import "@fontsource/courier-prime";
 import { theme as chakraTheme } from "../configs/chakra/theme/chakra-theme";
 
-/*
-TODO:
-* Head for every page
-*/
-
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider theme={chakraTheme}>
