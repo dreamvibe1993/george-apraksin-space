@@ -1,8 +1,6 @@
 import React from "react";
 import { Image, VStack, Box, Flex, Heading, List } from "@chakra-ui/react";
 
-import Head from "next/head";
-
 import { SkillBlock } from "../components/skills-block/skills-block";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
 import { StatusBar } from "../components/status-bar/status-bar";

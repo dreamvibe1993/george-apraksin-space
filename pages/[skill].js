@@ -1,5 +1,4 @@
 import { Box, Button, Flex, Heading, Text, VStack } from "@chakra-ui/react";
-import axios from "axios";
 import Link from "next/link";
 import React from "react";
 import { HeadComponent } from "../components/head/head";
@@ -11,10 +10,8 @@ export async function getServerSideProps(context) {
     ? capitalize(context.params.skill).replace("_", " ")
     : "";
   try {
-    const res = await axios.get(
-      apiAddress.replace(/[\s\r\n]*/, "") + "/projects"
-    );
-    const projects = res.data.data.map((proj) => ({
+    const res = await fetch(apiAddress + "/projects").then(res => res.json());
+    const projects = res.data.map((proj) => ({
       ...proj.attributes.data,
     }));
     const projectsNeededForThisPage = projects.filter((proj) =>
