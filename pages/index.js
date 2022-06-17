@@ -6,6 +6,7 @@ import Head from "next/head";
 import { SkillBlock } from "../components/skills-block/skills-block";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
 import { StatusBar } from "../components/status-bar/status-bar";
+import { HeadComponent } from "../components/head/head";
 
 export async function getServerSideProps() {
   const personal = {
@@ -29,21 +30,7 @@ export default function Home(props) {
 
   return (
     <>
-      <Head>
-        <title>George for hire.</title>
-        <meta
-          name="description"
-          content="A Front-end dev looking for a job."
-        ></meta>
-        <meta property="og:image" content="/images/me.jpg"></meta>
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="George for hire." />
-        <meta
-          property="og:description"
-          content="A Front-end dev looking for a job."
-        />
-        <link rel="icon" href="/favicon.ico"></link>
-      </Head>
+      <HeadComponent />
       <VStack as="main" pb={10} px={10} fontSize={["inherit", 20]}>
         <Heading mt={10}>George.</Heading>
         <StatusBar />

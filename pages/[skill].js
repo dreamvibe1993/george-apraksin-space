@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
+import { HeadComponent } from "../components/head/head";
 import { apiAddress } from "../configs/api/config";
 import { capitalize } from "../utils/text/capitalize";
 
@@ -44,35 +45,13 @@ export async function getServerSideProps(context) {
 
 export function SkillPage(props) {
   const { projects, heading } = props;
+
   if (!projects.length) {
     return (
-      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
-        <Flex
-          direction="column"
-          shadow="base"
-          p={5}
-          justify="center"
-          w="100%"
-          border={"1px"}
-          borderColor="gray.200"
-        >
-          <Heading textAlign={"center"}>There is nothing 😢...</Heading>
-          <Text>
-            Either there is no projects I made with {heading.toLowerCase()} or
-            it is impossible to render them like this.
-          </Text>
-        </Flex>
-        <LinkBack url="/" />
-      </VStack>
-    );
-  }
-  return (
-    <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
-      <Heading textAlign={"center"}>My {heading} projects</Heading>
-      {projects.map((proj) => {
-        return (
+      <>
+        <HeadComponent title="There is nothing..." />
+        <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
           <Flex
-            key={proj.id}
             direction="column"
             shadow="base"
             p={5}
@@ -81,54 +60,84 @@ export function SkillPage(props) {
             border={"1px"}
             borderColor="gray.200"
           >
-            <Flex borderBottom={"1px"} borderColor="gray.200">
-              <Box w={["40%", "20%"]} noOfLines={1} fontWeight={"bold"}>
-                <Text>Title</Text>
-              </Box>
-              <Box flex={1}>
-                <Text noOfLines={1} alt={proj.name}>
-                  {proj.name}
-                </Text>
-              </Box>
-            </Flex>
-            {proj.gitUrls.length > 0 && (
-              <URLRow
-                title={`Git Repo${proj.gitUrls.length > 1 ? "s" : ""}`}
-                urlsArray={proj.gitUrls}
-              />
-            )}
-            {proj.deployedUrls.length > 0 && (
-              <URLRow
-                title={`Link${proj.deployedUrls.length > 1 ? "s" : ""}`}
-                urlsArray={proj.deployedUrls}
-              />
-            )}
-            <Flex borderBottom={"1px"} borderColor="gray.200">
-              <Flex
-                align="center"
-                w={["40%", "20%"]}
-                noOfLines={1}
-                fontWeight={"bold"}
-                my={1}
-              >
-                <Text>Stack</Text>
-              </Flex>
-              <Flex flex={1} flexWrap="wrap" w={["60%", "80%"]}>
-                {proj.keywords.map((keyword, index) => (
-                  <Text key={keyword} noOfLines={1}>
-                    {keyword}
-                    {index === proj.keywords.length - 1 ? "" : `,`}&nbsp;
-                  </Text>
-                ))}
-              </Flex>
-            </Flex>
+            <Heading textAlign={"center"}>There is nothing 😢...</Heading>
+            <Text>
+              Either there is no projects I made with {heading.toLowerCase()} or
+              it is impossible to render them like this.
+            </Text>
           </Flex>
-        );
-      })}
-      <Flex justify={"flex-start"} w="100%">
-        <LinkBack url="/" />
-      </Flex>
-    </VStack>
+          <LinkBack url="/" />
+        </VStack>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <HeadComponent title={`George's ${heading} projects`} />
+      <VStack as="main" p={[5, 10]} fontSize={["inherit", 20]}>
+        <Heading textAlign={"center"}>My {heading} projects</Heading>
+        {projects.map((proj) => {
+          return (
+            <Flex
+              key={proj.id}
+              direction="column"
+              shadow="base"
+              p={5}
+              justify="center"
+              w="100%"
+              border={"1px"}
+              borderColor="gray.200"
+            >
+              <Flex borderBottom={"1px"} borderColor="gray.200">
+                <Box w={["40%", "20%"]} noOfLines={1} fontWeight={"bold"}>
+                  <Text>Title</Text>
+                </Box>
+                <Box flex={1}>
+                  <Text noOfLines={1} alt={proj.name}>
+                    {proj.name}
+                  </Text>
+                </Box>
+              </Flex>
+              {proj.gitUrls.length > 0 && (
+                <URLRow
+                  title={`Git Repo${proj.gitUrls.length > 1 ? "s" : ""}`}
+                  urlsArray={proj.gitUrls}
+                />
+              )}
+              {proj.deployedUrls.length > 0 && (
+                <URLRow
+                  title={`Link${proj.deployedUrls.length > 1 ? "s" : ""}`}
+                  urlsArray={proj.deployedUrls}
+                />
+              )}
+              <Flex borderBottom={"1px"} borderColor="gray.200">
+                <Flex
+                  align="center"
+                  w={["40%", "20%"]}
+                  noOfLines={1}
+                  fontWeight={"bold"}
+                  my={1}
+                >
+                  <Text>Stack</Text>
+                </Flex>
+                <Flex flex={1} flexWrap="wrap" w={["60%", "80%"]}>
+                  {proj.keywords.map((keyword, index) => (
+                    <Text key={keyword} noOfLines={1}>
+                      {keyword}
+                      {index === proj.keywords.length - 1 ? "" : `,`}&nbsp;
+                    </Text>
+                  ))}
+                </Flex>
+              </Flex>
+            </Flex>
+          );
+        })}
+        <Flex justify={"flex-start"} w="100%">
+          <LinkBack url="/" />
+        </Flex>
+      </VStack>
+    </>
   );
 }
 
