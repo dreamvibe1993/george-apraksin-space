@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Heading,
-  List,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -15,14 +14,17 @@ import { apiAddress } from "../configs/api/config";
 import { capitalize } from "../utils/text/capitalize";
 
 export async function getServerSideProps(context) {
+  console.log(`Received context: ${context?.params?.skill}`)
   const heading = context?.params?.skill
     ? capitalize(context.params.skill).replace("_", " ")
     : "";
   try {
+    console.log(`Making request by: ${apiAddress}/projects`)
     const res = await axios.get(`${apiAddress}/projects`);
     const projects = res.data.data.map((proj) => ({
       ...proj.attributes.data,
     }));
+    console.log(`Got response: ${projects}`)
     const projectsNeededForThisPage = projects.filter((proj) =>
       proj.keywords.includes(context.params.skill)
     );
