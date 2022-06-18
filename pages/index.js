@@ -12,6 +12,8 @@ export async function getServerSideProps() {
     myTG: process.env.MY_TG,
     // eslint-disable-next-line no-undef
     myPhone: process.env.MY_PHONE,
+    // eslint-disable-next-line no-undef
+    myEmail: process.env.MY_EMAIL,
   };
   return { props: { personal } };
 }
@@ -20,10 +22,17 @@ export default function Home(props) {
   const { personal } = props;
 
   const myContacts = [
-    // eslint-disable-next-line no-undef
-    { source: "telegram", contact: personal.myTG },
-    // eslint-disable-next-line no-undef
-    { source: "phone", contact: `tel:${personal.myPhone}` },
+    { source: "telegram", contact: personal.myTG, href: personal.myTG },
+    {
+      source: "phone",
+      contact: personal.myPhone,
+      href: `tel:${personal.myPhone}`,
+    },
+    {
+      source: "email",
+      contact: personal.myEmail,
+      href: `mailto:${personal.myEmail}`,
+    },
   ];
 
   return (
