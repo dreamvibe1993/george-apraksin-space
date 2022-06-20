@@ -10,22 +10,7 @@ export async function getServerSideProps(context) {
     ? capitalize(context.params.skill).replace("_", " ")
     : "";
   try {
-    const getProjects = async () =>
-      await fetch(apiAddress + "/projects")
-        .then(async (res) => {
-          console.log(res.status);
-          if (!res.ok && res.status === 504) {
-            res = await getProjects();
-          }
-          
-          if (!res.ok) {
-            throw new Error("ERROR: ", res.status);
-          } else {
-            return res;
-          }
-        })
-        .then((res) => res.json());
-    const res = await getProjects();
+    const res = await fetch(apiAddress + "/projects").then((res) => res.json());
     const projects = res.data.map((proj) => ({
       ...proj.attributes.data,
     }));

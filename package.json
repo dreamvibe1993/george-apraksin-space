@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "NEXT_PUBLIC_ENV=production next build",
     "start": "next start",
+    "start-prod": "NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {

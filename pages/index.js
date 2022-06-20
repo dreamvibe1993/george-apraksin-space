@@ -5,36 +5,9 @@ import { SkillBlock } from "../components/skills-block/skills-block";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
 import { StatusBar } from "../components/status-bar/status-bar";
 import { HeadComponent } from "../components/head/head";
+import { myContacts } from "../configs/personal/myContacts";
 
-export async function getServerSideProps() {
-  const personal = {
-    // eslint-disable-next-line no-undef
-    myTG: process.env.MY_TG,
-    // eslint-disable-next-line no-undef
-    myPhone: process.env.MY_PHONE,
-    // eslint-disable-next-line no-undef
-    myEmail: process.env.MY_EMAIL,
-  };
-  return { props: { personal } };
-}
-
-export default function Home(props) {
-  const { personal } = props;
-
-  const myContacts = [
-    { source: "telegram", contact: personal.myTG, href: personal.myTG },
-    {
-      source: "phone",
-      contact: personal.myPhone,
-      href: `tel:${personal.myPhone}`,
-    },
-    {
-      source: "email",
-      contact: personal.myEmail,
-      href: `mailto:${personal.myEmail}`,
-    },
-  ];
-
+export default function Home() {
   return (
     <>
       <HeadComponent />
@@ -44,7 +17,7 @@ export default function Home(props) {
         <Flex direction="column" align={"center"} maxW="600px">
           <Box maxW={"500px"}>
             <Image
-              src={personal?.myPictureSrc || "/images/me.jpg"}
+              src={"/images/me.jpg"}
               alt="Me. George."
               shadow={"base"}
               mb={5}
