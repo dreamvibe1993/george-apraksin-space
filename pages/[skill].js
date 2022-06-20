@@ -137,9 +137,9 @@ export function SkillPage(props) {
 }
 
 const LinkBack = ({ url }) => (
-  <Button>
-    <Link href={url}>Back</Link>
-  </Button>
+  <Link href={url}>
+    <Button>Back</Button>
+  </Link>
 );
 
 const URLRow = ({ title, urlsArray }) => (
