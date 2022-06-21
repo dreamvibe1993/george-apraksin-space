@@ -9,12 +9,13 @@ import {
   List,
   Spinner,
 } from "@chakra-ui/react";
+import Image from "next/image";
+
+import { IoIosArrowBack } from "react-icons/io";
 
 import { theme as chakraTheme } from "../configs/chakra/theme/chakra-theme";
 import { myContacts } from "../configs/personal/myContacts";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
-import { IoIosArrowBack } from "react-icons/io";
-import Image from "next/image";
 
 function Error({ statusCode }) {
   const [isGifLoaded, setIfGifLoaded] = React.useState(false);

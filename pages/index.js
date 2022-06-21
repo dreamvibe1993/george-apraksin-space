@@ -1,5 +1,15 @@
 import React from "react";
-import { Image, VStack, Box, Flex, Heading, List } from "@chakra-ui/react";
+import {
+  Image,
+  VStack,
+  Box,
+  Flex,
+  Heading,
+  List,
+  Divider,
+} from "@chakra-ui/react";
+import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 import { SkillBlock } from "../components/skills-block/skills-block";
 import { ListItemTruncated } from "../components/list-item-truncated/list-item-truncated";
@@ -11,17 +21,35 @@ export default function Home() {
   return (
     <>
       <HeadComponent />
-      <VStack as="main" pb={10} px={10} fontSize={["inherit", 20]}>
-        <Heading mt={10}>George.</Heading>
-        <StatusBar />
+      <VStack as="main" p={10} fontSize={["inherit", 20]}>
+        <Heading>George.</Heading>
+        <Flex
+          align="center"
+          justify="space-between"
+          cursor="pointer"
+          w="100%"
+          maxW={500}
+        >
+          <Flex justify={["center", "center"]}>
+
+          <StatusBar />
+          </Flex>
+          <Link href="/blog" textDecoration={"none"}>
+            <Flex align={"center"}>
+              <div>Blog&nbsp;</div>
+              <IoIosArrowForward />
+            </Flex>
+          </Link>
+        </Flex>
         <Flex direction="column" align={"center"} maxW="600px">
-          <Box maxW={"500px"}>
-            <Image
-              src={"/images/me.jpg"}
-              alt="Me. George."
-              shadow={"base"}
-              mb={5}
-            />
+          <Box
+            mb={5}
+            maxW={"500px"}
+            border={1}
+            borderColor="gray.200"
+            borderStyle="solid"
+          >
+            <Image src={"/images/me.jpg"} alt="Me. George." shadow={"base"} />
           </Box>
           <SkillBlock />
         </Flex>

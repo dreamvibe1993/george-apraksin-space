@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Spinner } from "@chakra-ui/react";
+import { Box, Flex, Spinner, Text } from "@chakra-ui/react";
 import { useLoadStatus } from "../../services/hooks/useLoadStatus/useLoadStatus";
 
 export const StatusBar = () => {
@@ -28,8 +28,11 @@ export const StatusBar = () => {
           &nbsp;
         </Box>
       </Flex>
-      <Flex flex={1} justify="flex-start" fontSize={"sm"}>
+      <Flex flex={1} justify="flex-start" fontSize={"sm"} pt={1.4} lineHeight={"sm"}>
+        <Text noOfLines={1} display={["none", "initial"]}>
+
         {data.status}
+        </Text>
       </Flex>
     </Flex>
   );
