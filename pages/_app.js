@@ -6,6 +6,12 @@ import "../styles/globals.css";
 import "@fontsource/courier-prime";
 import { theme as chakraTheme } from "../configs/chakra/theme/chakra-theme";
 
+/*
+TODO: 
+  * handle no posts
+  * 
+*/
+
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = React.useState(false);
 

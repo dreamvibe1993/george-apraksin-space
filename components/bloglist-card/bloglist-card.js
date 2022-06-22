@@ -4,7 +4,12 @@ import { Badge, Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 
-export default function BlogListCard() {
+export default function BlogListCard({
+  title,
+  post,
+  badges,
+  id
+}) {
   return (
     <Box
       w="100%"
@@ -20,15 +25,24 @@ export default function BlogListCard() {
       borderColor="gray.200"
       borderStyle={"solid"}
     >
-      <Heading >Blog Title</Heading>
-      <Text>Minim reprehenderit ut ea laborum ut quis est.</Text>
-      <Flex mt={2}>
-        <Badge pt={1} mr={1} colorScheme="green">Thoughts</Badge>
-        <Badge pt={1} mr={1} colorScheme="blue">Sad</Badge>
-        <Badge pt={1} mr={1} colorScheme="red">Tech</Badge>
-      </Flex>
+      <Heading>{title}</Heading>
+      <Text>{post.slice(0, 40)}...</Text>
+      {Array.isArray(badges) && badges.length > 0 && (
+        <Flex mt={2}>
+          {badges.map((badge) => (
+            <Badge
+              pt={1}
+              mr={1}
+              colorScheme={badge.color}
+              key={`${badge.title}${badge.color}`}
+            >
+              {badge.title}
+            </Badge>
+          ))}
+        </Flex>
+      )}
       <Box cursor={"pointer"} mt={2}>
-        <Link href="blog/4-12-23">
+        <Link href={`blog/${id}`}>
           <Flex justify={"flex-end"} align="center">
             <div style={{ paddingTop: "2.5px" }}>Read it&nbsp;</div>
             <IoIosArrowForward />
