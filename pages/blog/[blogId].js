@@ -3,12 +3,13 @@ import Link from "next/link";
 import { Box, Flex, Spinner, VStack } from "@chakra-ui/react";
 
 import { IoIosArrowBack } from "react-icons/io";
+import { useRouter } from "next/router";
 
+import Error from "../_error";
 import BlogpostCard from "../../components/blogpost-card/blogpost-card";
 import { useLoadBlog } from "../../services/hooks/useLoadBlog/useLoadBlog";
 import { ErrorProcessingRequest } from "../../components/errors/error-processing-request/error-processing-request";
-import { useRouter } from "next/router";
-import Error from "../_error";
+import { HeadComponent } from "../../components/head/head";
 
 const LinkBack = () => (
   <Flex justify="flex-start" w="100%" maxW={600} pb={5}>
@@ -24,7 +25,25 @@ const LinkBack = () => (
   </Flex>
 );
 
-export default function BlogByDate() {
+export default function BlogByDateWithHead() {
+  const title = "George's blog";
+  const desc = "A Frontend-dev called George's blog";
+  const imageSrc = "../images/me-2.jpg";
+  return (
+    <>
+      <HeadComponent
+        title={title}
+        ogTitle={title}
+        desc={desc}
+        ogDesc={desc}
+        ogImage={imageSrc}
+      />
+      <BlogByDate />
+    </>
+  );
+}
+
+function BlogByDate() {
   const router = useRouter();
   const {
     data: blog,

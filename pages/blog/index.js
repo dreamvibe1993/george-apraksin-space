@@ -6,6 +6,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import BlogListCard from "../../components/bloglist-card/bloglist-card";
 import { useLoadBlogs } from "../../services/hooks/useLoadBlogs/useLoadBlogs";
 import { ErrorProcessingRequest } from "../../components/errors/error-processing-request/error-processing-request";
+import { HeadComponent } from "../../components/head/head";
 
 const LinkBack = () => (
   <Flex justify="flex-start" w="100%" maxW={600} pb={5}>
@@ -22,7 +23,25 @@ const LinkBack = () => (
   </Flex>
 );
 
-export default function Blog() {
+export default function BlogWithHead() {
+  const title = "George's blog";
+  const desc = "A Frontend-dev called George's blog";
+  const imageSrc = "../images/me-2.jpg";
+  return (
+    <>
+      <HeadComponent
+        title={title}
+        ogTitle={title}
+        desc={desc}
+        ogDesc={desc}
+        ogImage={imageSrc}
+      />
+      <Blog />
+    </>
+  );
+}
+
+function Blog() {
   const { data: blogs, isLoading, isError } = useLoadBlogs();
 
   if (isLoading) {
@@ -59,7 +78,7 @@ export default function Blog() {
       </VStack>
     );
   }
-  
+
   return (
     <VStack as="main" p={10} fontSize={["inherit", 20]}>
       <LinkBack />
