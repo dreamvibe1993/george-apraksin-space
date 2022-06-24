@@ -82,9 +82,13 @@ function Blog() {
   return (
     <VStack as="main" p={10} fontSize={["inherit", 20]}>
       <LinkBack />
-      {blogs.map((blog) => (
-        <BlogListCard key={blog.createdAt} {...blog} />
-      ))}
+      {blogs
+        .sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        })
+        .map((blog) => (
+          <BlogListCard key={blog.createdAt} {...blog} />
+        ))}
     </VStack>
   );
 }

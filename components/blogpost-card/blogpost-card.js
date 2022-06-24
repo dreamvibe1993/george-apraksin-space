@@ -18,7 +18,7 @@ import { CardWrapper } from "../../ui/card-wrapper/card-wrapper";
 export default function BlogpostCard({ title, post, createdAt, images }) {
   return (
     <VStack as="main" p={10} fontSize={["inherit", 20]}>
-      <Flex justify="flex-start" w="100%" maxW={600} pb={5}>
+      <Flex justify="flex-start" w="100%" maxW={1200} pb={5}>
         <Box
           alignItems={"center"}
           display="flex"
@@ -29,7 +29,7 @@ export default function BlogpostCard({ title, post, createdAt, images }) {
           <IoIosArrowBack />
         </Box>
       </Flex>
-      <Box maxW={600}>
+      <Box maxW={1200}>
         <CardWrapper>
           <Heading textAlign={"center"}>{title}</Heading>
           <Divider />
@@ -42,7 +42,7 @@ export default function BlogpostCard({ title, post, createdAt, images }) {
                 >
                   {images.map((img, i) => (
                     <GridItem p={2} key={img.src + i}>
-                      <Image src={`../${img.src}`} />
+                      <Image src={img.src.match(/\bhttp.*/gi) ? img.src : `../${img.src}`} />
                     </GridItem>
                   ))}
                 </Grid>
